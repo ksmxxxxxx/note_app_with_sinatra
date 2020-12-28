@@ -1,5 +1,5 @@
 # note_app_with_sinatra
-Fjord Bootcamp plactise
+Fjord Bootcamp practice
 
 # Usage
 1. Make directory `data`
