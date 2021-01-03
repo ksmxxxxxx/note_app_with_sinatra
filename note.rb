@@ -1,33 +1,33 @@
 require 'json'
 require 'securerandom'
+require 'pg'
 
 class Note
   class << self
-    def render
-      files = Dir.glob("data/*.json").sort_by { |file| File.mtime(file) }.reverse
-      files.map { |file| JSON.parse(File.read(file), symbolize_names: true) }
+    def render_note
+      connection = PG.connect( dbname: 'note_app' )
+      connection.exec( "SELECT * FROM note" )
     end
 
-    def get_by_id(uuid: note_id)
-      JSON.parse(File.read("data/#{uuid}.json"), symbolize_names: true)
+    def get_by_id(id: note_id)
+      connection = PG.connect( dbname: 'note_app' )
+      connection.exec( "SELECT * FROM note WHERE id=#{id}" )
     end
 
     def create(title: note_title, body: note_body)
-      note_data = { uuid: SecureRandom.uuid, title: title, body: body }
-      File.open("data/#{note_data[:uuid]}.json", "w") do |file|
-        file.puts JSON.pretty_generate(note_data)
-      end
+      connection = PG.connect( dbname: 'note_app' )
+      connection.exec( "INSERT INTO note(title, body) VALUES ('#{title}', '#{body}')" )
     end
 
-    def edit(uuid: note_uuid, title: note_title, body: note_body)
-      note_data = { uuid: uuid, title: title, body: body }
-      File.open("data/#{note_data[:uuid]}.json", "w") do |file|
-        file.puts JSON.pretty_generate(note_data)
-      end
+    def edit(id: note_id, title: note_title, body: note_body)
+      connection = PG.connect( dbname: 'note_app' )
+      connection.exec( "UPDATE note SET title='#{title}', body='#{body}' WHERE id=#{id}" )
     end
 
-    def delete(uuid: note_uuid)
-      File.delete("data/#{uuid}.json")
+    def delete(id: note_uuid)
+      connection = PG.connect( dbname: 'note_app' )
+      connection.exec( "DELETE FROM note WHERE id=#{id}" )
+      #File.delete("data/#{uuid}.json")
     end
   end
 end
