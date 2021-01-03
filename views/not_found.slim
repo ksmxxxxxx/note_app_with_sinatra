@@ -1,0 +1,18 @@
+doctype html
+html lang='ja'
+  head
+    meta charset='utf-8'
+    meta name='viewport' content='width=device-width, initial-scale=1'
+    link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css'
+    link rel='stylesheet' href='/stylesheets/not_found.css'
+    title == @title
+  body
+    .has-background-primary.is-flex-grow-1
+      .container.is-fluid
+        section.hero.is-primary
+          .hero-body
+            h1.title
+              | Hmmm, Error
+            p
+              | You request page is not found. Please back to 
+              a href='/' top page

@@ -49,3 +49,7 @@ delete '/notes/:uuid' do
 
   redirect to('/')
 end
+
+not_found do
+  slim :not_found, :layout => false
+end
