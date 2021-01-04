@@ -6,7 +6,7 @@ class Note
   class << self
     def render_note
       connection = PG.connect( dbname: 'note_app' )
-      connection.exec( "SELECT * FROM note" )
+      connection.exec( "SELECT * FROM note ORDER BY id DESC" )
     end
 
     def get_by_id(id: note_id)
@@ -27,7 +27,6 @@ class Note
     def delete(id: note_uuid)
       connection = PG.connect( dbname: 'note_app' )
       connection.exec( "DELETE FROM note WHERE id=#{id}" )
-      #File.delete("data/#{uuid}.json")
     end
   end
 end

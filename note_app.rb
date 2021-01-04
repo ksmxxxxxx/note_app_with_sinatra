@@ -26,7 +26,6 @@ end
 
 get '/notes/:id' do
   @note = Note.get_by_id(id: params[:id])
-  @note.each {|i| p i}
 
   slim :show
 end
