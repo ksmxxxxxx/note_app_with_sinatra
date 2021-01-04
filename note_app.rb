@@ -13,13 +13,13 @@ get '/' do
   slim :index
 end
 
-get '/new' do
+get '/notes/new' do
   @title = 'Add new note'
 
   slim :new
 end
 
-post '/new' do
+post '/notes/new' do
   Note.create(title: params[:title], body: params[:body])
 
   redirect to('/')
