@@ -8,8 +8,7 @@ require './note.rb'
 get '/' do
   @title = 'Note'
   @content = 'Note List'
-  files = Dir.glob("data/*.json").sort_by { |file| File.mtime(file) }.reverse
-  @notes = files.map { |file| JSON.parse(File.read(file), symbolize_names: true) }
+  @notes = Note.render_note
 
   slim :index
 end
