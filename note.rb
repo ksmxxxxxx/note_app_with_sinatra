@@ -3,7 +3,7 @@ require 'securerandom'
 
 class Note
   class << self
-    def render_note
+    def render
       files = Dir.glob("data/*.json").sort_by { |file| File.mtime(file) }.reverse
       files.map { |file| JSON.parse(File.read(file), symbolize_names: true) }
     end

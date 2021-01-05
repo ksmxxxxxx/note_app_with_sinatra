@@ -8,7 +8,7 @@ require './note.rb'
 get '/' do
   @title = 'Note'
   @content = 'Note List'
-  @notes = Note.render_note
+  @notes = Note.render
 
   slim :index
 end
@@ -19,7 +19,7 @@ get '/notes/new' do
   slim :new
 end
 
-post '/notes/new' do
+post '/notes' do
   Note.create(title: params[:title], body: params[:body])
 
   redirect to('/')
