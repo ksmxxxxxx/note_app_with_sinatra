@@ -37,7 +37,7 @@ get '/notes/:uuid/edit' do
   slim :edit
 end
 
-put '/notes/:uuid' do
+patch '/notes/:uuid' do
   Note.edit(uuid: params[:uuid], title: params[:title], body: params[:body])
 
   redirect to('/')
