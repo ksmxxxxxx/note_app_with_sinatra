@@ -1,7 +1,0 @@
-ul
-  - @notes.each do |item|
-    li style='border-bottom: 1px solid #eee; margin-bottom: 20px; padding-bottom: 20px;'
-      a.is-text href="/notes/#{item[:uuid]}"= item[:title]
-
-.has-text-centered
-  a.button.is-primary href='/new' Add New Note

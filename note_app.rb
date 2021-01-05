@@ -1,22 +1,24 @@
 require 'sinatra'
 require 'sinatra/reloader'
 require 'json'
-require 'slim'
+#require 'slim'
+require 'erb'
 require 'securerandom'
 require './note.rb'
+include ERB::Util
 
 get '/' do
   @title = 'Note'
   @content = 'Note List'
   @notes = Note.render_note
 
-  slim :index
+  erb :index
 end
 
 get '/notes/new' do
   @title = 'Add new note'
 
-  slim :new
+  erb :new
 end
 
 post '/notes/new' do
@@ -28,13 +30,13 @@ end
 get '/notes/:uuid' do
   @note = Note.get_by_id(uuid: params[:uuid])
 
-  slim :show
+  erb :show
 end
 
 get '/notes/:uuid/edit' do
   @note = Note.get_by_id(uuid: params[:uuid])
 
-  slim :edit
+  erb :edit
 end
 
 patch '/notes/:uuid' do
@@ -50,5 +52,11 @@ delete '/notes/:uuid' do
 end
 
 not_found do
-  slim :not_found, :layout => false
+  erb :not_found, :layout => false
+end
+
+helpers do
+  def h(text)
+    escape_html(text)
+  end
 end

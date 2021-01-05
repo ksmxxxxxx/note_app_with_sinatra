@@ -1,0 +1,15 @@
+<h2 class="title"><%= h(@note[:title]) %></h2>
+<hr>
+<div><%= h(@note[:body]) %></div>
+<hr>
+<div class="buttons is-centered">
+  <div class="control">
+    <a class="button is-outline" href="/notes/<%= @note[:uuid] %>/edit">Edit</a>
+  </div>
+  <div class="control">
+    <form action="/notes/#{@note[:uuid]}" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <button class="button is-danger" type="submit">Delete</button>
+    </form>
+  </div>
+</div>
