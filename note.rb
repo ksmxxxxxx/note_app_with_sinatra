@@ -4,7 +4,7 @@ require 'pg'
 
 class Note
   class << self
-    def render_note
+    def render
       connection = PG.connect( dbname: 'note_app' )
       connection.exec( "SELECT * FROM note ORDER BY id DESC" )
     end

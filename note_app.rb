@@ -7,7 +7,7 @@ require './note.rb'
 
 get '/' do
   @title = 'Note'
-  @notes = Note.render_note
+  @notes = Note.render
 
   slim :index
 end
@@ -36,7 +36,7 @@ get '/notes/:id/edit' do
   slim :edit
 end
 
-put '/notes/:id' do
+patch '/notes/:id' do
   Note.edit(id: params[:id], title: params[:title], body: params[:body])
 
   redirect to('/')
