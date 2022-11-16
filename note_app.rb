@@ -7,7 +7,6 @@ require './note.rb'
 
 get '/' do
   @title = 'Note'
-  @content = 'Note List'
   @notes = Note.render
 
   slim :index
@@ -25,26 +24,26 @@ post '/notes' do
   redirect to('/')
 end
 
-get '/notes/:uuid' do
-  @note = Note.get_by_id(uuid: params[:uuid])
+get '/notes/:id' do
+  @note = Note.get_by_id(id: params[:id])
 
   slim :show
 end
 
-get '/notes/:uuid/edit' do
-  @note = Note.get_by_id(uuid: params[:uuid])
+get '/notes/:id/edit' do
+  @note = Note.get_by_id(id: params[:id])
 
   slim :edit
 end
 
-patch '/notes/:uuid' do
-  Note.edit(uuid: params[:uuid], title: params[:title], body: params[:body])
+patch '/notes/:id' do
+  Note.edit(id: params[:id], title: params[:title], body: params[:body])
 
   redirect to('/')
 end
 
-delete '/notes/:uuid' do
-  Note.delete(uuid: params[:uuid])
+delete '/notes/:id' do
+  Note.delete(id: params[:id])
 
   redirect to('/')
 end

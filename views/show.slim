@@ -1,11 +1,12 @@
-h2.title = @note[:title]
-hr
-div = @note[:body]
-hr
-.buttons.is-centered
-  .control
-    a.button.is-outline href="/notes/#{@note[:uuid]}/edit" Edit
-  .control
-    form action="/notes/#{@note[:uuid]}" method='post'
-      input type='hidden' name='_method' value='delete'
-      button.button.is-danger type='submit' Delete
+- @note.each do |item|
+    h2.title = item["title"]
+    hr
+    div = item["body"]
+    hr
+    .buttons.is-centered
+      .control
+        a.button.is-outline href="/notes/#{item['id']}/edit" Edit
+      .control
+        form action="/notes/#{item['id']}" method='post'
+          input type='hidden' name='_method' value='delete'
+          button.button.is-danger type='submit' Delete
